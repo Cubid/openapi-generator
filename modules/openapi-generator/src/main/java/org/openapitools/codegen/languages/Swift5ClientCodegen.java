@@ -721,9 +721,9 @@ public class Swift5ClientCodegen extends DefaultCodegen implements CodegenConfig
         if (p.getEnum() != null && !p.getEnum().isEmpty()) {
             if (p.getDefault() != null) {
                 if (ModelUtils.isStringSchema(p)) {
-                    return "." + toEnumVarName(escapeText((String) p.getDefault()), p.getType());
+                    return "." + toEnumVarName(escapeText((String) p.getDefault()), p.getType(), false);
                 } else {
-                    return "." + toEnumVarName(escapeText(p.getDefault().toString()), p.getType());
+                    return "." + toEnumVarName(escapeText(p.getDefault().toString()), p.getType(), false);
                 }
             }
         }
@@ -967,7 +967,7 @@ public class Swift5ClientCodegen extends DefaultCodegen implements CodegenConfig
     }
 
     @Override
-    public String toEnumVarName(String name, String datatype) {
+    public String toEnumVarName(String name, String datatype, boolean isModel) {
         if (name.length() == 0) {
             return "empty";
         }
@@ -993,7 +993,7 @@ public class Swift5ClientCodegen extends DefaultCodegen implements CodegenConfig
         if (getSymbolName(name) != null) {
             return camelize(WordUtils.capitalizeFully(getSymbolName(name).toUpperCase(Locale.ROOT)), true);
         }
-        
+
         // Camelize only when we have a structure defined below
         Boolean camelized = false;
         if (name.matches("[A-Z][a-z0-9]+[a-zA-Z0-9]*")) {

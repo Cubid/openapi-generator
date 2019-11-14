@@ -774,13 +774,13 @@ public class DefaultCodegen implements CodegenConfig {
      * @param datatype data type
      * @return the sanitized variable name for enum
      */
-    public String toEnumVarName(String value, String datatype) {
+    public String toEnumVarName(String value, String datatype, boolean isModel) {
         if (value.length() == 0) {
             return "EMPTY";
         }
 
         String var = value.replaceAll("\\W+", "_").toUpperCase(Locale.ROOT);
-        if (var.matches("\\d.*")) {
+        if (var.matches("^\\d")) {
             return "_" + var;
         } else {
             return var;
@@ -5915,7 +5915,7 @@ public class DefaultCodegen implements CodegenConfig {
                 }
             }
 
-            enumVar.put("name", toEnumVarName(enumName, dataType));
+            enumVar.put("name", toEnumVarName(enumName, dataType, false));
             enumVar.put("value", toEnumValue(String.valueOf(value), dataType));
             enumVar.put("isString", isDataTypeString(dataType));
             enumVars.add(enumVar);
@@ -5940,7 +5940,7 @@ public class DefaultCodegen implements CodegenConfig {
                 enumValue = String.valueOf(11184809);
             }
 
-            enumVar.put("name", toEnumVarName(enumName, dataType));
+            enumVar.put("name", toEnumVarName(enumName, dataType, false));
             enumVar.put("value", toEnumValue(enumValue, dataType));
             enumVar.put("isString", isDataTypeString(dataType));
             enumVars.add(enumVar);

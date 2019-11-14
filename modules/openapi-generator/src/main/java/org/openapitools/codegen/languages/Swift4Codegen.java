@@ -601,9 +601,9 @@ public class Swift4Codegen extends DefaultCodegen implements CodegenConfig {
         if (p.getEnum() != null && !p.getEnum().isEmpty()) {
             if (p.getDefault() != null) {
                 if (ModelUtils.isStringSchema(p)) {
-                    return "." + toEnumVarName(escapeText((String) p.getDefault()), p.getType());
+                    return "." + toEnumVarName(escapeText((String) p.getDefault()), p.getType(), false);
                 } else {
-                    return "." + toEnumVarName(escapeText(p.getDefault().toString()), p.getType());
+                    return "." + toEnumVarName(escapeText(p.getDefault().toString()), p.getType(), false);
                 }
             }
         }
@@ -802,7 +802,7 @@ public class Swift4Codegen extends DefaultCodegen implements CodegenConfig {
     }
 
     @Override
-    public String toEnumVarName(String name, String datatype) {
+    public String toEnumVarName(String name, String datatype, boolean isModel) {
         if (name.length() == 0) {
             return "empty";
         }

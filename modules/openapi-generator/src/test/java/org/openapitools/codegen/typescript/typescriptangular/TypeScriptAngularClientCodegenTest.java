@@ -39,26 +39,26 @@ public class TypeScriptAngularClientCodegenTest {
         TypeScriptAngularClientCodegen codegen = new TypeScriptAngularClientCodegen();
         // unspecified option should default to PascalCase
         codegen.processOpts();
-        Assert.assertEquals(codegen.toEnumVarName("valid_id", "string"), "ValidId");
-        Assert.assertEquals(codegen.toEnumVarName("illegal-id+", "string"), "IllegalId");
+        Assert.assertEquals(codegen.toEnumVarName("valid_id", "string", false), "ValidId");
+        Assert.assertEquals(codegen.toEnumVarName("illegal-id+", "string", false), "IllegalId");
 
         codegen = new TypeScriptAngularClientCodegen();
         codegen.additionalProperties().put(CodegenConstants.ENUM_PROPERTY_NAMING, CodegenConstants.ENUM_PROPERTY_NAMING_TYPE.original.name());
         codegen.processOpts();
-        Assert.assertEquals(codegen.toEnumVarName("valid_id", "string"), "valid_id");
-        Assert.assertEquals(codegen.toEnumVarName("illegal-id+", "string"), "illegal_id");
+        Assert.assertEquals(codegen.toEnumVarName("valid_id", "string", false), "valid_id");
+        Assert.assertEquals(codegen.toEnumVarName("illegal-id+", "string", false), "illegal_id");
 
         codegen = new TypeScriptAngularClientCodegen();
         codegen.additionalProperties().put(CodegenConstants.ENUM_PROPERTY_NAMING, CodegenConstants.ENUM_PROPERTY_NAMING_TYPE.UPPERCASE.name());
         codegen.processOpts();
-        Assert.assertEquals(codegen.toEnumVarName("valid_id", "string"), "VALID_ID");
-        Assert.assertEquals(codegen.toEnumVarName("illegal-id+", "string"), "ILLEGAL_ID");
+        Assert.assertEquals(codegen.toEnumVarName("valid_id", "string", false), "VALID_ID");
+        Assert.assertEquals(codegen.toEnumVarName("illegal-id+", "string", false), "ILLEGAL_ID");
 
         codegen = new TypeScriptAngularClientCodegen();
         codegen.additionalProperties().put(CodegenConstants.ENUM_PROPERTY_NAMING, CodegenConstants.ENUM_PROPERTY_NAMING_TYPE.snake_case.name());
         codegen.processOpts();
-        Assert.assertEquals(codegen.toEnumVarName("valid_ID", "string"), "valid_id");
-        Assert.assertEquals(codegen.toEnumVarName("Illegal-Id+", "string"), "illegal_id");
+        Assert.assertEquals(codegen.toEnumVarName("valid_ID", "string", false), "valid_id");
+        Assert.assertEquals(codegen.toEnumVarName("Illegal-Id+", "string", false), "illegal_id");
     }
 
     @Test

@@ -27,11 +27,11 @@ public class CSharpNetCoreClientCodegenTest {
         final CSharpNetCoreClientCodegen codegen = new CSharpNetCoreClientCodegen();
         codegen.processOpts();
 
-        Assert.assertEquals(codegen.toEnumVarName("FooBar", "string"), "FooBar");
-        Assert.assertEquals(codegen.toEnumVarName("fooBar", "string"), "FooBar");
-        Assert.assertEquals(codegen.toEnumVarName("foo-bar", "string"), "FooBar");
-        Assert.assertEquals(codegen.toEnumVarName("foo_bar", "string"), "FooBar");
-        Assert.assertEquals(codegen.toEnumVarName("foo bar", "string"), "FooBar");
+        Assert.assertEquals(codegen.toEnumVarName("FooBar", "string", false), "FooBar");
+        Assert.assertEquals(codegen.toEnumVarName("fooBar", "string", false), "FooBar");
+        Assert.assertEquals(codegen.toEnumVarName("foo-bar", "string", false), "FooBar");
+        Assert.assertEquals(codegen.toEnumVarName("foo_bar", "string", false), "FooBar");
+        Assert.assertEquals(codegen.toEnumVarName("foo bar", "string", false), "FooBar");
 
         // The below cases do not work currently, camelize doesn't support uppercase
         // Assert.assertEquals(codegen.toEnumVarName("FOO-BAR", "string"), "FooBar");

@@ -109,7 +109,7 @@ public class CsharpModelEnumTest {
         Assert.assertTrue(statusProperty.isEnum);
         Assert.assertEquals(statusProperty.datatypeWithEnum, "StatusEnumName");
 
-        Assert.assertEquals(codegen.toEnumVarName("Aaaa", ""), "AaaaEnumValue");
+        Assert.assertEquals(codegen.toEnumVarName("Aaaa", "", false), "AaaaEnumValue");
     }
 
     @Test(description = "use default suffixes for enums")
@@ -126,7 +126,7 @@ public class CsharpModelEnumTest {
         Assert.assertTrue(statusProperty.isEnum);
         Assert.assertEquals(statusProperty.datatypeWithEnum, "StatusEnum");
 
-        Assert.assertEquals(codegen.toEnumVarName("Aaaa", ""), "AaaaEnum");
+        Assert.assertEquals(codegen.toEnumVarName("Aaaa", "", false), "AaaaEnum");
     }
 
     @Test(description = "support empty suffixes for enums")
@@ -145,7 +145,7 @@ public class CsharpModelEnumTest {
         Assert.assertTrue(statusProperty.isEnum);
         Assert.assertEquals(statusProperty.datatypeWithEnum, "Status");
 
-        Assert.assertEquals(codegen.toEnumVarName("Aaaa", ""), "Aaaa");
+        Assert.assertEquals(codegen.toEnumVarName("Aaaa", "", false), "Aaaa");
     }
 
 }

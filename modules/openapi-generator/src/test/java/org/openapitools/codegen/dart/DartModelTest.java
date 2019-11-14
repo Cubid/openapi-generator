@@ -438,7 +438,7 @@ public class DartModelTest {
     @Test(dataProvider = "enumVarNames", description = "test enum names are correctly escaped")
     public void convertEnumVarNames(EnumVarName enumVar) {
         final DefaultCodegen codegen = new DartClientCodegen();
-        Assert.assertEquals(codegen.toEnumVarName(enumVar.name, enumVar.dataType), enumVar.expected);
+        Assert.assertEquals(codegen.toEnumVarName(enumVar.name, enumVar.dataType, false), enumVar.expected);
     }
 
     @Test(description = "model names support `--model-name-prefix` and `--model-name-suffix`")

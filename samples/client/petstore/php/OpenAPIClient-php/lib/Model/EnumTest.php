@@ -335,6 +335,14 @@ class EnumTest implements ModelInterface, ArrayAccess, \JsonSerializable
             );
         }
 
+            $outer_enumAllowedValues = \OpenAPI\Client\Model\OuterEnum::getAllowableEnumValues();
+            if (!is_null($this->container['outer_enum']) && !in_array($this->container['outer_enum'], $outer_enumAllowedValues, true)) {
+                $invalidProperties[] = sprintf(
+                    "invalid value for 'outer_enum', must be one of '%s'",
+                    implode("', '", $allowedValues)
+                );
+            }
+
         return $invalidProperties;
     }
 
@@ -499,12 +507,21 @@ class EnumTest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets outer_enum
      *
-     * @param \OpenAPI\Client\Model\OuterEnum|null $outer_enum outer_enum
+     * @param string|null $outer_enum outer_enum
      *
      * @return self
      */
     public function setOuterEnum($outer_enum)
     {
+        $allowedValues = \OpenAPI\Client\Model\OuterEnum::getAllowableEnumValues();
+        if (!is_null($outer_enum) && !in_array($outer_enum, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'outer_enum', must be one of '%s'",
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
         $this->container['outer_enum'] = $outer_enum;
 
         return $this;

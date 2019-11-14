@@ -627,7 +627,7 @@ public abstract class AbstractDartCodegen extends DefaultCodegen {
             List<Map<String, Object>> values = (List<Map<String, Object>>) extension;
             for (Map<String, Object> value : values) {
                 Map<String, Object> enumVar = new HashMap<>();
-                enumVar.put("name", toEnumVarName((String) value.get("identifier"), dataType));
+                enumVar.put("name", toEnumVarName((String) value.get("identifier"), dataType, true));
                 enumVar.put("value", toEnumValue(value.get("numericValue").toString(), dataType));
                 enumVar.put("isString", isDataTypeString(dataType));
                 if (value.containsKey("description")) {
@@ -641,7 +641,7 @@ public abstract class AbstractDartCodegen extends DefaultCodegen {
     }
 
     @Override
-    public String toEnumVarName(String value, String datatype) {
+    public String toEnumVarName(String value, String datatype, boolean isModel) {
         if (value.length() == 0) {
             return "empty";
         }

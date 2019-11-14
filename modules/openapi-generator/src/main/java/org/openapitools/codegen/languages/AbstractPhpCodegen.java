@@ -649,7 +649,7 @@ public abstract class AbstractPhpCodegen extends DefaultCodegen implements Codeg
     }
 
     @Override
-    public String toEnumVarName(String name, String datatype) {
+    public String toEnumVarName(String name, String datatype, boolean isModel) {
         if (name.length() == 0) {
             return "EMPTY";
         }
@@ -665,6 +665,9 @@ public abstract class AbstractPhpCodegen extends DefaultCodegen implements Codeg
             varName = varName.replaceAll("-", "MINUS_");
             varName = varName.replaceAll("\\+", "PLUS_");
             varName = varName.replaceAll("\\.", "_DOT_");
+            if (isModel && varName.matches("^\\d")) {
+                varName = "_" + varName;
+            }
             return varName;
         }
 
