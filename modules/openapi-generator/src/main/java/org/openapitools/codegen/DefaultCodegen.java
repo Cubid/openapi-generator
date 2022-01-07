@@ -781,7 +781,7 @@ public class DefaultCodegen implements CodegenConfig {
         }
 
         String var = value.replaceAll("\\W+", "_").toUpperCase(Locale.ROOT);
-        if (var.matches("^\\d")) {
+        if (var.matches("\\d.*")) {
             return "_" + var;
         } else {
             return var;
@@ -3521,23 +3521,24 @@ public class DefaultCodegen implements CodegenConfig {
 
         Schema referencedSchema = ModelUtils.getReferencedSchema(this.openAPI, p);
 
-        if (referencedSchema != p) {
-            //Referenced enum case:
-            if (referencedSchema.getEnum() != null && !referencedSchema.getEnum().isEmpty()) {
+        //Referenced enum case:
+        if (referencedSchema.getEnum() != null && !referencedSchema.getEnum().isEmpty()) {
+
+            if (referencedSchema != p) {
                 property.referencedEnumType = getTypeDeclaration(referencedSchema);
-
-                List<Object> _enum = referencedSchema.getEnum();
-
-                Map<String, Object> allowableValues = new HashMap<>();
-                allowableValues.put("values", _enum);
-                if (allowableValues.size() > 0) {
-                    property.allowableValues = allowableValues;
-                }
             }
 
-            if (referencedSchema.getNullable() != null) {
-                property.isNullable = referencedSchema.getNullable();
+            List<Object> _enum = referencedSchema.getEnum();
+
+            Map<String, Object> allowableValues = new HashMap<>();
+            allowableValues.put("values", _enum);
+            if (allowableValues.size() > 0) {
+                property.allowableValues = allowableValues;
             }
+        }
+
+        if (referencedSchema.getNullable() != null) {
+            property.isNullable = referencedSchema.getNullable();
         }
 
         property.dataType = getTypeDeclaration(p);
